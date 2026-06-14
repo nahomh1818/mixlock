@@ -100,7 +100,7 @@ public interface IAudioSessionControl2
     void SetIconPath(string value, Guid eventContext);
     void GetGroupingParam(out Guid pRetVal);
     void SetGroupingParam(Guid value, Guid eventContext);
-    void RegisterAudioSessionNotification(IntPtr NewNotifications);
+    void RegisterAudioSessionNotification(IAudioSessionEvents NewNotifications);
     void UnregisterAudioSessionNotification(IntPtr NewNotifications);
     void GetSessionIdentifier(out IntPtr pRetVal);
     void GetSessionInstanceIdentifier(out IntPtr pRetVal);

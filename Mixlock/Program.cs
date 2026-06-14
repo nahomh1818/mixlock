@@ -19,3 +19,20 @@ for(int i = 0; i < sessionEnumerator.GetCount(); i++){
 for(int i = 0; i < controls.Length; i++){
     Console.WriteLine($"Session instance id: {AudioSessionHelpers.GetProcessName(controls[i])}");
 }
+
+AudioSessionEvents events = new AudioSessionEvents();
+
+IAudioSessionControl2 spotify;
+
+for(int i = 0; i < controls.Length; i++)
+{
+    if (AudioSessionHelpers.GetProcessName(controls[i]).Equals("Spotify"))
+    {
+        spotify = controls[i];
+        spotify.RegisterAudioSessionNotification(events);
+        Console.WriteLine("Registered Spotify events.");
+    }
+}
+
+Console.WriteLine("Listening...");
+Console.ReadLine();
