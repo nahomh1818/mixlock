@@ -16,9 +16,9 @@ for(int i = 0; i < sessionEnumerator.GetCount(); i++){
     controls[i] = AudioSessionHelpers.GetSessionControl(sessionEnumerator, i);
 }
 
-for(int i = 0; i < controls.Length; i++){
-    Console.WriteLine($"Session instance id: {AudioSessionHelpers.GetProcessName(controls[i])}");
-}
+// for(int i = 0; i < controls.Length; i++){
+//     Console.WriteLine($"Session instance id: {AudioSessionHelpers.GetProcessName(controls[i])}");
+// }
 
 AudioSessionEvents events = new AudioSessionEvents();
 
@@ -31,8 +31,13 @@ for(int i = 0; i < controls.Length; i++)
         spotify = controls[i];
         spotify.RegisterAudioSessionNotification(events);
         Console.WriteLine("Registered Spotify events.");
+        float volume = AudioSessionHelpers.GetVolume(spotify);
+        Console.WriteLine($"{AudioSessionHelpers.GetProcessName(spotify)} master volume: {volume * 100:0}%");
+        Console.WriteLine("Setting Spotify master to 50%");
+        AudioSessionHelpers.SetVolume(spotify, 0.5f);
+        
     }
 }
 
-Console.WriteLine("Listening...");
-Console.ReadLine();
+// Console.WriteLine("Listening...");
+// Console.ReadLine();

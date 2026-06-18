@@ -60,4 +60,24 @@ public class AudioSessionHelpers{
 
         return process.ProcessName;
     }
+
+    public static ISimpleAudioVolume GetSimpleAudioVolume(IAudioSessionControl2 session){
+        return (ISimpleAudioVolume)session;
+    }
+
+    public static float GetVolume(IAudioSessionControl2 session){
+        ISimpleAudioVolume volume = GetSimpleAudioVolume(session);
+
+        volume.GetMasterVolume(out float level);
+
+        return level;
+    }
+
+    public static void SetVolume(IAudioSessionControl2 session, float level){
+        ISimpleAudioVolume volume = GetSimpleAudioVolume(session);
+
+        Guid eventContext = Guid.NewGuid();
+
+        volume.SetMasterVolume(level, ref eventContext);
+    }
 }
